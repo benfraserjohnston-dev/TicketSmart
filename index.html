@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#08152d" />
+  <meta name="description" content="TicketSmart compares flight fares, baggage, seats and flexibility transparently." />
+  <title>TicketSmart — Smarter flight choices</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="TicketSmart home">
+        <span class="brand-mark">T<span>✦</span></span>
+        <span>Ticket<span class="brand-light">Smart</span></span>
+      </a>
+      <button class="new-search" id="newSearchBtn"><span>＋</span> New search</button>
+      <p class="nav-label">WORKSPACE</p>
+      <button class="nav-item active" data-view="search"><span>⌕</span> Flight search</button>
+      <button class="nav-item" data-view="saved"><span>♡</span> Saved flights <span class="nav-count" id="savedCount">0</span></button>
+      <button class="nav-item" data-view="alerts"><span>↗</span> Price watch</button>
+      <div class="sidebar-bottom">
+        <div class="source-note"><span class="status-dot"></span><div><strong>Transparent by design</strong><small>Sample mode · no live airline feeds</small></div></div>
+        <div class="profile"><div class="avatar">TS</div><div><strong>Guest traveller</strong><small>Preferences saved on this device</small></div><span class="more">···</span></div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="mobile-brand"><span class="brand-mark">T<span>✦</span></span> TicketSmart</div>
+        <div class="breadcrumb">Travel workspace <span>/</span> <strong id="topSection">Flight search</strong></div>
+        <div class="top-actions"><span class="live-pill"><i></i> Direct-source first</span><button class="icon-btn" id="helpBtn" aria-label="About TicketSmart">?</button></div>
+      </header>
+
+      <section class="hero" id="hero">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="spark">✦</span> THE SMARTER WAY TO FLY</div>
+          <h1>Find the fare that<br/><em>actually costs less.</em></h1>
+          <p>Compare flights by the things that matter: baggage, seats, flexibility and the real total — not just the headline price.</p>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+          <div class="plane">✈</div><div class="art-star star-a">✦</div><div class="art-star star-b">✧</div>
+          <div class="art-label">YOUR NEXT<br/>SMART MOVE</div>
+        </div>
+      </section>
+
+      <section class="search-panel" id="searchPanel">
+        <div class="search-tabs">
+          <button class="trip-tab active" data-trip="return">↔ Return</button>
+          <button class="trip-tab" data-trip="oneway">→ One way</button>
+          <button class="trip-tab" data-trip="multicity">⇢ Multi-city <span class="soon">BETA</span></button>
+          <span class="search-tip">Prices in GBP · Demo results clearly labelled</span>
+        </div>
+        <form id="flightForm">
+          <div class="route-row">
+            <label class="field airport-field"><span>FROM</span><div class="field-input"><span class="field-icon">⌖</span><input id="origin" value="London (Any)" autocomplete="off" required/><span class="airport-code">LON</span></div></label>
+            <button type="button" class="swap-btn" id="swapBtn" aria-label="Swap airports">⇄</button>
+            <label class="field airport-field"><span>TO</span><div class="field-input"><span class="field-icon">⌖</span><input id="destination" value="New York (Any)" autocomplete="off" required/><span class="airport-code">NYC</span></div></label>
+          </div>
+          <div class="details-row">
+            <label class="field"><span>DEPARTURE</span><input id="departDate" type="date" required/></label>
+            <label class="field" id="returnField"><span>RETURN</span><input id="returnDate" type="date" required/></label>
+            <label class="field compact"><span>TRAVELLERS</span><select id="travellers"><option value="1">1 adult</option><option value="2" selected>2 adults</option><option value="3">3 adults</option><option value="4">4 adults</option><option value="2,1">2 adults, 1 child</option></select></label>
+            <label class="field compact"><span>CABIN</span><select id="cabin"><option>Economy</option><option>Premium economy</option><option>Business</option><option>First</option></select></label>
+          </div>
+          <div class="preferences">
+            <span class="preferences-title">I need</span>
+            <label class="check-pill"><input type="checkbox" id="checkedBag" checked/><span class="checkmark">✓</span> Checked bag</label>
+            <label class="check-pill"><input type="checkbox" id="seatTogether" checked/><span class="checkmark">✓</span> Seats together</label>
+            <label class="check-pill"><input type="checkbox" id="directOnly"/><span class="checkmark">✓</span> Direct only</label>
+            <label class="check-pill"><input type="checkbox" id="flexible"/><span class="checkmark">✓</span> Flexible fare</label>
+            <button class="search-btn" type="submit"><span>✦</span> Compare fares <span class="arrow">→</span></button>
+          </div>
+        </form>
+      </section>
+
+      <section class="assistant-strip">
+        <div class="assistant-icon">✦</div>
+        <div class="assistant-copy"><strong>Ask TicketSmart AI</strong><p>Tell us what matters and we'll compare the total, not just the ticket.</p></div>
+        <div class="quick-prompts">
+          <button class="prompt-chip" data-prompt="Find the cheapest flight with a checked bag and seats together">Cheapest with bags</button>
+          <button class="prompt-chip" data-prompt="Compare the best value options and explain the trade-offs">Best value</button>
+        </div>
+      </section>
+
+      <section class="results-section" id="resultsSection">
+        <div class="section-heading"><div><div class="eyebrow muted">YOUR OPTIONS</div><h2 id="resultsTitle">Smart picks for your trip</h2><p id="resultsSubtitle">Example offers to demonstrate fare comparison.</p></div><div class="sort-wrap"><label for="sortSelect">Sort by</label><select id="sortSelect"><option value="total">Lowest total cost</option><option value="base">Lowest ticket price</option><option value="duration">Shortest journey</option><option value="value">Best value</option></select></div></div>
+        <div class="demo-banner"><span>ⓘ</span><div><strong>Demonstration data — not live prices.</strong> These example fares are fictional and cannot be booked. Live airline-direct pricing will appear only after an authorised airline data connection is configured.</div><button id="dismissBanner" aria-label="Dismiss notice">×</button></div>
+        <div class="result-layout">
+          <div class="flight-list" id="flightList" aria-live="polite"></div>
+          <aside class="compare-side">
+            <div class="side-card ai-card"><div class="card-title"><span class="mini-spark">✦</span> TicketSmart insight <span class="ai-tag">AI</span></div><p id="insightText">The lowest headline fare isn't always the lowest total. Compare baggage and seats before choosing.</p><button id="askAiBtn" class="text-link">Ask about these fares <span>→</span></button></div>
+            <div class="side-card cost-card"><div class="card-title">YOUR TRIP NEEDS <span class="edit-label">EDIT ABOVE</span></div><div class="cost-row"><span>Checked bag</span><strong id="needBag">Required</strong></div><div class="cost-row"><span>Seats together</span><strong id="needSeats">Required</strong></div><div class="cost-row"><span>Direct flight</span><strong id="needDirect">Flexible</strong></div><div class="cost-row"><span>Fare flexibility</span><strong id="needFlex">Not required</strong></div><div class="cost-foot">Unknown add-on prices stay unknown — never counted as £0.</div></div>
+            <div class="side-card source-card"><div class="source-icon">⌁</div><div><strong>Direct means direct</strong><p>TicketSmart is designed to prioritise airline-owned booking channels. This demo has no connected live data provider.</p><button class="text-link" id="sourceInfoBtn">How sources work <span>→</span></button></div></div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="chat-section" id="chatSection">
+        <div class="chat-heading"><div><div class="eyebrow muted">YOUR TRAVEL COPILOT</div><h2>Ask in your own words.</h2><p>Refine your trip with a conversation.</p></div><span class="chat-badge"><span class="status-dot"></span> Demo assistant</span></div>
+        <div class="chat-box">
+          <div class="chat-messages" id="chatMessages"><div class="message assistant"><div class="chat-avatar">✦</div><div class="bubble"><strong>Hi, I'm TicketSmart.</strong><br/>Tell me what matters most — a checked bag, seats together, direct flights, or flexibility — and I'll explain how to compare the options. This demo uses example fares, not live availability.</div></div></div>
+          <form class="chat-form" id="chatForm"><span class="chat-input-icon">✦</span><input id="chatInput" placeholder="e.g. Find me the cheapest fare with a 23kg bag…" autocomplete="off"/><button type="submit" aria-label="Send message">↑</button></form>
+          <div class="chat-disclaimer">AI suggestions are based on visible demo data. Always verify fare rules with the airline.</div>
+        </div>
+      </section>
+      <footer><a class="footer-brand" href="#">TicketSmart</a><span>Smarter flight choices, with no fare surprises.</span><span>Prototype · Airline-direct integration not connected</span></footer>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="modalBackdrop" hidden><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal-close" id="modalClose" aria-label="Close">×</button><div class="eyebrow muted">TICKETSMART TRANSPARENCY</div><h2 id="modalTitle">Know what you're comparing.</h2><div id="modalContent"></div></section></div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
